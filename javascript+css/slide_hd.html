@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About me</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+		body{
+			background:#000;	
+		}
+        #box {
+            width: 600px;
+            height: 300px;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        #box ul {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #box ul li {
+            width: 600px;
+            height: 300px;
+            float: left;
+            line-height: 300px;
+            text-align: center;
+            font-size: 250px;
+        }
+        #box ol {
+            position: absolute;
+            width: 400px;
+            left: 50%;
+            bottom: 10px;
+            margin-left: -200px;
+        }
+        #box ol li {
+            width: 80px;
+            height: 20px;
+            background: #fff;
+            float: left;
+            margin: 10px;
+            position: relative;
+        }
+        #box ol li span {
+            width: 0;
+            height: 20px;
+            background: #ff120f;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+		
+		.one{
+			background:url(../statics/img/silde1.png) no-repeat;
+			background-size:cover;	
+		}
+		.two{
+			background:url(../statics/img/silde2.png) no-repeat;
+			background-size:cover;	
+		}
+		.three{
+			background:url(../statics/img/silde3.png) no-repeat;
+			background-size:cover;	
+		}
+		.frou{
+			background:url(../statics/img/silde4.png) no-repeat;
+			background-size:cover;	
+		}
+    </style>
+    <script>
+        window.onload = function() {
+            var oBox = document.getElementById('box');
+            var oUl = oBox.children[0];
+            var oOl = oBox.children[1];
+            var aLi = oUl.children;
+            var aSpan = oOl.getElementsByTagName('span');
+
+            oUl.innerHTML += oUl.innerHTML;
+
+            oUl.style.width = aLi[0].offsetWidth * aLi.length+ 'px';
+            var bSin = false;
+            oBox.onmouseover = function() {
+                bSin = true;
+
+                for (var i = 0; i < aSpan.length; i++) {
+                    aSpan[i].style.width = 0;
+                    clearInterval(aSpan[i].timer);
+                }
+            };
+
+            oBox.onmouseout = function() {
+                bSin = false;
+                next();
+            };
+
+            var iNow = 0;
+            next();
+            function next() {
+                move(aSpan[iNow%aSpan.length], {
+                    width: 80
+                }, {
+                    easing: 'linear',
+                    complete: function() {
+                        iNow++;
+
+                        for (var i = 0; i < aSpan.length; i++) {
+                            aSpan[i].style.width = 0;
+                        }
+                        startMove(oUl,-iNow * aLi[0].offsetWidth,function(){
+                            if (!bSin) {
+                                next();
+                            }
+                        });
+                    }
+                });
+            }
+
+            var left = 0;
+            var timer = null;
+            var W = oUl.offsetWidth/2;
+            function startMove(obj,iTarget,complete) {
+                clearInterval(timer);
+                var start = left;
+                var dis = iTarget - start;
+                var count = Math.floor(700/30);
+                var n = 0;
+                timer = setInterval(function(){
+                    n++;
+                    var a = n / count;
+                    var cur = start + dis * a;
+                    left = cur;
+                    obj.style.left = cur%W + 'px';
+                    if (n == count) {
+                        clearInterval(timer);
+                        complete && complete();
+                    }
+                },30);
+            }
+        };
+		
+		function getStyle(obj,name) {
+			return (obj.currentStyle || getComputedStyle(obj,false))[name];
+		}
+		
+		function move(obj,json,options) {
+			options = options || {};
+			options.duration = options.duration || 1000;
+			options.easing = options.easing || 'ease-out';
+
+			clearInterval(obj.timer);
+			var count = Math.floor(options.duration/30); 
+			var start = {}; 
+			var dis = {}; 
+		
+			for (var name in json) {
+				start[name] = parseFloat(getStyle(obj,name));
+				dis[name] = json[name] - start[name];
+			}
+		
+			var n = 0;
+			obj.timer = setInterval(function(){
+				n++;
+		
+				for (var name in json) {
+					switch(options.easing) {
+						case 'linear':
+							var a = n / count;
+							var cur = start[name] + dis[name]*a;
+							break;
+						case 'ease-in':
+							var a = n / count;
+							var cur = start[name] + dis[name] * Math.pow(a,3);
+							break;
+						case 'ease-out':
+							var a = 1 - n/count;
+							var cur = start[name] + dis[name]*(1-Math.pow(a,3));
+							break;
+					}
+					if (name == 'opacity') {
+						obj.style.opacity = cur;
+						obj.style.filter = 'alpha(opacity:'+cur*100+')';
+					} else {
+						obj.style[name] = cur + 'px';
+					}
+				}
+		
+				if (n == count) {
+					clearInterval(obj.timer);
+
+					options.complete && options.complete();
+				}
+			},30);
+		}
+
+    </script>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li class="one"></li>
+            <li class="two"></li>
+            <li class="three"></li>
+            <li class="frou"></li>
+        </ul>
+        <ol>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+        </ol>
+    </div>
+</body>
+</html>

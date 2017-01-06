@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>颠颠欢——原生Js+css作品</title>
+    <style>
+        body{
+			font-family: "microsoft yahei";
+			background-color:#f34335;
+		}
+        .thum-group{
+            padding:20px;
+            width:860px;
+            margin:0 auto;
+        }
+        .thum-item{
+            width:260px;
+            height:324px;
+            position:relative;
+            overflow: hidden;
+            float:left;
+            cursor: pointer;
+            margin-right:40px;
+            margin-bottom:40px;
+            background-color: #AEB5BF;
+            -webkit-box-shadow: 0 4px 8px 1px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 4px 8px 1px rgba(0,0,0,.2);
+            box-shadow:0 4px 8px 1px rgba(0,0,0,.2);
+        }
+        .nomargin-r{
+            margin-right:0;
+        }
+		a{
+			cursor:pointer;
+			text-decoration:none;
+		}
+        .thum-group .thum-item1 {
+            background:url(statics/img/starwars.png) no-repeat;
+			background-size:260px 324px;
+        }
+        .thum-group .thum-item2 {
+            background:url(statics/img/pubu.png) no-repeat;
+        }
+        .thum-group .thum-item3 {
+            background:url(statics/img/rili.png) no-repeat;
+        }
+        .thum-group .thum-item4 {
+            background:url(statics/img/show.png) no-repeat;
+        }
+        .thum-group .thum-item5 {
+            background:url(statics/img/slide.png) no-repeat;
+        }
+        .thum-group .thum-item6 {
+            background:url(statics/img/time.png) no-repeat;
+        }
+
+        .thum-item-title{
+            display: block;
+            position: absolute;
+            width: 100%;
+            background-color: transparent;
+            text-align: center;
+            -webkit-transition: all ease 0.3s;
+            -moz-transition: all ease 0.3s ;
+            -ms-transition: all ease 0.3s ;
+            -o-transition: all ease 0.3s ;
+            transition: all ease 0.3s ;
+            font-size:20px;
+            color:#fff;
+            z-index: 78;
+            top: 85px;
+        }
+        .thum-item-sin-caption {
+            position: absolute;
+            background-color: #fff;
+            width: 100%;
+            height: 90px;
+            left: 0;
+            bottom: 0;
+            text-align: center;
+            padding-top: 18px;
+        }
+        .thum-item-full-caption {
+            position: absolute;
+            width: 100%;
+            height: 319px;
+            box-sizing: border-box;
+            padding: 20px;
+            left: 0;
+            bottom: -319px;
+            z-index: 67;
+            font-size: 14px;
+            color: #999999;
+            background-color: #eeeeee;
+            transition: all .3s ease;
+        }
+        .thum-item-full-caption-text {
+            display: block;
+            margin-top: 170px;
+            transition: all .3s ease;
+            line-height:30px;
+        }
+        .thum-item-full-caption-bg {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 200px;
+            left: 0;
+            background-color: #eee;
+        }
+        .thum-item-arrow-circle {
+            display: block;
+            position: absolute;
+            z-index: 75;
+            text-align: center;
+            line-height: 25px;
+            bottom: 20px;
+            left: 120px;
+            color:#fff;
+            border-radius: 50%;
+            background-color: #999999;
+            width: 28px;
+            height: 28px;
+            transition: all .3s ease;
+        }
+        .thum-item-circle {
+            display: block;
+            position: absolute;
+            left:0px;
+            top: -17px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background-color:rgba(255,102,84,0.9);
+            transform: scale(0.5);
+            transition: all .15s ease;
+        }
+        /*鼠标移上去的CSS样式*/
+        .thum-item.active .thum-item-title {
+            top: 35px;
+            color: #333333;
+        }
+
+        .thum-item.active .thum-item-full-caption {
+            bottom: 0;
+        }
+
+        .thum-item.active .thum-item-full-caption-text {
+            margin-top: 50px;
+        }
+
+        .thum-item.active .thum-item-arrow-circle {
+            transform: rotateZ(-180deg);
+            background-color: #e84c3d;
+            color: #fff;
+            transform-origin:	50% 50% 0;
+        }
+
+        .thum-item.active .thum-item-circle {
+            top: 0px;
+            height: 5px;
+            border-radius: 0;
+            transform: scale(1);
+        }
+        .clearboth{
+            clear:both;
+        }
+
+    </style>
+</head>
+<body>
+<div class="thum-group">
+    <div class="thum-item thum-item1">
+        <a href="javascript+css/Star Wars.html">
+            <span class="thum-item-circle"></span>
+            <span class="thum-item-title">Star Wars</span>
+            <div class="thum-item-sin-caption">碰撞检测、拖拽、移动</div>
+            <div class="thum-item-full-caption">
+                <span class="thum-item-full-caption-text">游戏规则：按住鼠标拖拽小人，尽量躲避星星，运动过程中小人尽量不能掉地上，若掉了快速重新按住可继续游戏。</span>
+                <span class="thum-item-full-caption-bg"></span>
+            </div>
+            <span class="thum-item-arrow-circle">^</span>
+        </a>
+    </div>
+    <div class="thum-item thum-item2">
+        <a href="javascript+css/waterfall.html">
+            <span class="thum-item-circle"></span>
+            <span class="thum-item-title">Waterfall</span>
+            <div class="thum-item-sin-caption">瀑布流</div>
+            <div class="thum-item-full-caption">
+                <span class="thum-item-full-caption-text">宽度提前定义，但是高度没有定义，当高度大于可视区高度时不断的创建li</span>
+                <span class="thum-item-full-caption-bg"></span>
+            </div>
+            <span class="thum-item-arrow-circle">^</span>
+        </a>    
+    </div>
+    <div class="thum-item thum-item3 nomargin-r">
+        <a href="javascript+css/calendar.html">
+            <span class="thum-item-circle"></span>
+            <span class="thum-item-title">Canlendar</span>
+            <div class="thum-item-sin-caption">简易日历</div>
+            <div class="thum-item-full-caption">
+                <span class="thum-item-full-caption-text">简易版的日历，以后有时间的话希望还可以把它在完善完善。</span>
+                <span class="thum-item-full-caption-bg"></span>
+            </div>
+            <span class="thum-item-arrow-circle">^</span>
+        </a>
+    </div>
+    <div class="thum-item thum-item4">
+        <a href="javascript+css/show.html">
+            <span class="thum-item-circle"></span>
+            <span class="thum-item-title">Show</span>
+            <div class="thum-item-sin-caption">作品展示效果</div>
+            <div class="thum-item-full-caption">
+                <span class="thum-item-full-caption-text">鼠标拖拽图片进行展示</span>
+                <span class="thum-item-full-caption-bg"></span>
+            </div>
+            <span class="thum-item-arrow-circle">^</span>
+        </a>
+    </div>
+    <div class="thum-item thum-item5">
+        <a href="javascript+css/slide.html">
+            <span class="thum-item-circle"></span>
+            <span class="thum-item-title">Slide</span>
+            <div class="thum-item-sin-caption">自动播放幻灯片</div>
+            <div class="thum-item-full-caption">
+                <span class="thum-item-full-caption-text">有进度条的幻灯片。</span>
+                <span class="thum-item-full-caption-bg"></span>
+            </div>
+            <span class="thum-item-arrow-circle">^</span>
+        </a>
+    </div>
+    <div class="thum-item thum-item6 nomargin-r">
+        <a href="javascript+css/time.html">
+            <span class="thum-item-circle"></span>
+            <span class="thum-item-title">Timestamp</span>
+            <div class="thum-item-sin-caption">倒计时</div>
+            <div class="thum-item-full-caption">
+                <span class="thum-item-full-caption-text">输入一个时间值，点击开始，你就知道你输入的时间距离现在还有多久啦。</span>
+                <span class="thum-item-full-caption-bg"></span>
+            </div>
+            <span class="thum-item-arrow-circle">^</span>
+        </a>
+    </div>
+    <div class="clearboth"></div>
+</div>
+</body>
+<script src="http://7xnlea.com2.z0.glb.qiniucdn.com/jquery.min.js"></script>
+<script>
+    $('.thum-item').hover(
+            function(event) {
+                var circle = $(this).find('.thum-item-circle');
+                circle.attr('style', '');
+                $(this).addClass('active');
+            },
+            function(event) {
+                var circle = $(this).find('.thum-item-circle');
+                circle.css({
+                    transition: 'none',
+                    transform: 'scale(1.2)',
+                    top: '-28px',
+                    borderRadius: '50%'
+                });
+                setTimeout(function() {
+                    circle.css({
+                        transition: 'all .15s ease',
+                        transform: 'scale(0.5)',
+                        top: '-28px',
+                        height: '260px',
+                        borderRadius: '50%'
+                    });
+                }, 0);
+                $(this).removeClass('active');
+            }
+    );
+</script>
+</html>

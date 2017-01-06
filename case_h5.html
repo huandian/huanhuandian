@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>颠颠欢的作品</title>
+    <style>
+        body{
+			font-family: "microsoft yahei";
+			background-color:#33431d;
+		}
+        .thum-group{
+            padding:20px;
+            width:860px;
+            margin:0 auto;
+        }
+        .thum-item{
+            width:260px;
+            height:324px;
+            position:relative;
+            overflow: hidden;
+            float:left;
+            cursor: pointer;
+            margin-right:40px;
+            margin-bottom:40px;
+            background-color: #AEB5BF;
+            -webkit-box-shadow: 0 4px 8px 1px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 4px 8px 1px rgba(0,0,0,.2);
+            box-shadow:0 4px 8px 1px rgba(0,0,0,.2);
+        }
+        .nomargin-r{
+            margin-right:0;
+        }
+		a{
+			cursor:pointer;
+			text-decoration:none;
+		}
+        .thum-group .thum-item1 {
+            background:url(statics/img/3d_ring.png) no-repeat;
+			background-size:260px 324px;
+        }
+        .thum-group .thum-item2 {
+            background:url(statics/img/canvas.png) no-repeat;
+        }
+        .thum-group .thum-item3 {
+            background:url(statics/img/tu.png) no-repeat;
+        }
+        .thum-group .thum-item4 {
+            background:url(statics/img/mask.png) no-repeat;
+        }
+        .thum-group .thum-item5 {
+            background:url(statics/img/piano.png) no-repeat;
+        }
+        .thum-group .thum-item6 {
+            background:url(statics/img/ma.png) no-repeat;
+        }
+
+        .thum-item-title{
+            display: block;
+            position: absolute;
+            width: 100%;
+            background-color: transparent;
+            text-align: center;
+            -webkit-transition: all ease 0.3s;
+            -moz-transition: all ease 0.3s ;
+            -ms-transition: all ease 0.3s ;
+            -o-transition: all ease 0.3s ;
+            transition: all ease 0.3s ;
+            font-size:20px;
+            color:#fff;
+            z-index: 78;
+            top: 85px;
+        }
+        .thum-item-sin-caption {
+            position: absolute;
+            background-color: #fff;
+            width: 100%;
+            height: 90px;
+            left: 0;
+            bottom: 0;
+            text-align: center;
+            padding-top: 18px;
+        }
+        .thum-item-full-caption {
+            position: absolute;
+            width: 100%;
+            height: 319px;
+            box-sizing: border-box;
+            padding: 20px;
+            left: 0;
+            bottom: -319px;
+            z-index: 67;
+            font-size: 14px;
+            color: #999999;
+            background-color: #eeeeee;
+            transition: all .3s ease;
+        }
+        .thum-item-full-caption-text {
+            display: block;
+            margin-top: 170px;
+            transition: all .3s ease;
+            line-height:30px;
+        }
+        .thum-item-full-caption-bg {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 200px;
+            left: 0;
+            background-color: #eee;
+        }
+        .thum-item-arrow-circle {
+            display: block;
+            position: absolute;
+            z-index: 75;
+            text-align: center;
+            line-height: 25px;
+            bottom: 20px;
+            left: 120px;
+            color:#fff;
+            border-radius: 50%;
+            background-color: #999999;
+            width: 28px;
+            height: 28px;
+            transition: all .3s ease;
+        }
+        .thum-item-circle {
+            display: block;
+            position: absolute;
+            left:0px;
+            top: -17px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background-color:rgba(255,102,84,0.9);
+            transform: scale(0.5);
+            transition: all .15s ease;
+        }
+        /*鼠标移上去的CSS样式*/
+        .thum-item.active .thum-item-title {
+            top: 35px;
+            color: #333333;
+        }
+
+        .thum-item.active .thum-item-full-caption {
+            bottom: 0;
+        }
+
+        .thum-item.active .thum-item-full-caption-text {
+            margin-top: 50px;
+        }
+
+        .thum-item.active .thum-item-arrow-circle {
+            transform: rotateZ(-180deg);
+            background-color: #e84c3d;
+            color: #fff;
+            transform-origin:	50% 50% 0;
+        }
+
+        .thum-item.active .thum-item-circle {
+            top: 0px;
+            height: 5px;
+            border-radius: 0;
+            transform: scale(1);
+        }
+        .clearboth{
+            clear:both;
+        }
+
+    </style>
+</head>
+<body>
+<div class="thum-group">
+    <div class="thum-item thum-item1">
+        <a href="h5/3d_ring.html">
+            <span class="thum-item-circle"></span>
+            <span class="thum-item-title">3D_ring</span>
+            <div class="thum-item-sin-caption">3D图片环</div>
+            <div class="thum-item-full-caption">
+                <span class="thum-item-full-caption-text">可以进行拖拽、翻滚，主要运用Js+Html5的技巧实现的，敲的过程中其他没什么问题，主要角度的计算挺耗脑细胞的。</span>
+                <span class="thum-item-full-caption-bg"></span>
+            </div>
+            <span class="thum-item-arrow-circle">^</span>
+        </a>
+    </div>
+    <div class="thum-item thum-item2">
+        <a href="h5/stars.html">
+            <span class="thum-item-circle"></span>
+            <span class="thum-item-title">Canvas</span>
+            <div class="thum-item-sin-caption">starry sky</div>
+            <div class="thum-item-full-caption">
+                <span class="thum-item-full-caption-text">星空运用的是html5中的canvas加定时器进行绘画的</span>
+                <span class="thum-item-full-caption-bg"></span>
+            </div>
+            <span class="thum-item-arrow-circle">^</span>
+        </a>    
+    </div>
+    <div class="thum-item thum-item3 nomargin-r">
+        <a href="h5/lunbotu.html">
+            <span class="thum-item-circle"></span>
+            <span class="thum-item-title">Figure</span>
+            <div class="thum-item-sin-caption">各种轮播图</div>
+            <div class="thum-item-full-caption">
+                <span class="thum-item-full-caption-text">一些简单的切换效果</span>
+                <span class="thum-item-full-caption-bg"></span>
+            </div>
+            <span class="thum-item-arrow-circle">^</span>
+        </a>
+    </div>
+    <div class="thum-item thum-item4">
+        <a href="h5/mask_hd.html">
+            <span class="thum-item-circle"></span>
+            <span class="thum-item-title">Mask</span>
+            <div class="thum-item-sin-caption">管中窥豹</div>
+            <div class="thum-item-full-caption">
+                <span class="thum-item-full-caption-text">移动鼠标，会看到不一样的哦，运用html5中的mask有了一种朦胧感。</span>
+                <span class="thum-item-full-caption-bg"></span>
+            </div>
+            <span class="thum-item-arrow-circle">^</span>
+        </a>
+    </div>
+    <div class="thum-item thum-item5">
+        <a href="h5/piano.html">
+            <span class="thum-item-circle"></span>
+            <span class="thum-item-title">Audio</span>
+            <div class="thum-item-sin-caption">简易钢琴</div>
+            <div class="thum-item-full-caption">
+                <span class="thum-item-full-caption-text">发挥你的创意，尽情演奏一曲别样的乐章吧。按数字键1-9，或者直接鼠标点击都可以进行弹奏哦。</span>
+                <span class="thum-item-full-caption-bg"></span>
+            </div>
+            <span class="thum-item-arrow-circle">^</span>
+        </a>
+    </div>
+    <div class="thum-item thum-item6 nomargin-r">
+        <a href="h5/moblie.html">
+        <span class="thum-item-circle"></span>
+        <span class="thum-item-title">Mobile</span>
+        <div class="thum-item-sin-caption">移动端作品</div>
+        <div class="thum-item-full-caption">
+            <span class="thum-item-full-caption-text">扫描页面中的二维码，可以访问移动端的作品哦。</span>
+            <span class="thum-item-full-caption-bg"></span>
+        </div>
+        <span class="thum-item-arrow-circle">^</span>
+        </a>
+    </div>
+    <div class="clearboth"></div>
+</div>
+</body>
+<script src="http://7xnlea.com2.z0.glb.qiniucdn.com/jquery.min.js"></script>
+<script>
+    $('.thum-item').hover(
+            function(event) {
+                var circle = $(this).find('.thum-item-circle');
+                circle.attr('style', '');
+                $(this).addClass('active');
+            },
+            function(event) {
+                var circle = $(this).find('.thum-item-circle');
+                circle.css({
+                    transition: 'none',
+                    transform: 'scale(1.2)',
+                    top: '-28px',
+                    borderRadius: '50%'
+                });
+                setTimeout(function() {
+                    circle.css({
+                        transition: 'all .15s ease',
+                        transform: 'scale(0.5)',
+                        top: '-28px',
+                        height: '260px',
+                        borderRadius: '50%'
+                    });
+                }, 0);
+                $(this).removeClass('active');
+            }
+    );
+</script>
+</html>

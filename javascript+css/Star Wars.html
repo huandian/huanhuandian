@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+	<style>
+    	*{
+			padding:0;
+			margin:0;	
+		}
+		body{
+			background:url(img/star_bj.jpg);
+			background-size:cover;
+		}
+		.drag{
+			width:70px;
+			height:70px;
+			position:absolute;
+			left:0;
+			top:0;
+			background:url(img/star1.png);
+			background-size:cover;
+			border-radius:50%;	
+		}
+		#box{
+			width:154px;
+			height:172px;
+			background:url(img/star.png);
+			background-size:cover;
+			position:absolute;
+			left:400px;
+			bottom:0px;	
+		}
+		
+		#tips{
+			margin:200px auto;	
+			width:400px;
+			height:200px;
+			position:relative;
+			background:#033;
+			box-shadow:0 0 30px #CCC;
+			border-radius:10px;
+			display:none;
+			z-index:99;
+		}
+		
+		#leave,#again{
+			width:80px;
+			height:30px;
+			background:#999;
+			position:absolute;
+			bottom:20px;
+			font-size:18px;
+			text-align:center;
+			line-height:30px;
+			color:#000;
+			border-radius:8px;
+		}
+		#leave{
+			left:26px;
+		}
+		#again{
+			right:26px;
+		}
+		#tip{
+			width:100%;
+			position:absolute;
+			left:20px;
+			top:30px;
+			font-size:30px;
+			color:#636;	
+			text-align:center;
+		}
+		#again:hover{
+			box-shadow:0 0 6px grey;
+			cursor:pointer;
+		}
+		#leave:hover{
+			box-shadow:0 0 6px grey;
+			cursor:pointer;
+		}
+		#leave a{
+			text-decoration:none;
+			color:#000;
+		}
+    </style>
+</head>
+
+<body>
+		<div id="box"></div>
+        <div id="tips">
+        	<span id="tip">哎呀，撞到啦！！￣へ￣</span>
+        	<div id="leave"><a href="../case_js.html">下次再来</a></div>
+        	<div id="again">再玩一次</div>
+        </div>
+    
+    	<script>
+		
+		window.onload=function(){
+			var oBlock=document.getElementById('box');
+			var oDrag=document.getElementsByClassName('drag');
+			var oTips=document.getElementById('tips');
+			var oAgain=document.getElementById('again');
+			var oLeave=document.getElementById('leave');
+			
+			oAgain.onclick=function(){
+				location.reload();
+			};
+			
+
+						
+			for(var i=0;i<200;i++){
+				setTimeout(addBox,rnd(0,300000));
+				drag(oBlock);
+			}	
+			
+			function rnd(n,m){
+				return parseInt(Math.random()*(m-n)+n);
+			}
+
+			
+			function addBox(){
+			var oBox=document.createElement('div');
+			oBox.className='drag';
+			//var r=rnd(0,256);
+//			var g=rnd(0,256);
+//			var b=rnd(0,256);
+//			oBox.style.background='rgb('+r+','+g+','+b+')';
+
+			document.body.appendChild(oBox);
+			move(oBox,rnd(1,130),rnd(5,20));
+			drag(oBox);	
+		}
+		
+		function drag(oDiv){
+			oDiv.onmousedown=function(ev){
+				clearInterval(oDiv.timer);
+				var e=ev||event;
+				var disX=e.clientX-oDiv.offsetLeft;
+				var disY=e.clientY-oDiv.offsetTop;
+				
+				var speedX=0,speedY=0;
+				var lastX=0,lastY=0;
+				
+				document.onmousemove=function(ev){
+					var e=ev||event;
+					var l=e.clientX-disX;
+					var t=e.clientY-disY;
+					
+					var maxW = document.documentElement.clientWidth-oDiv.offsetWidth;
+                    var maxH = document.documentElement.clientHeight-oDiv.offsetHeight;
+                    l < 0 && (l = 0);
+                    l > maxW && (l = maxW);
+                    t < 0 && (t = 0);
+                    t > maxH && (t = maxH);
+					
+					
+					oDiv.style.left=l+'px';
+					oDiv.style.top=t+'px';
+					
+
+					
+					speedX=oDiv.offsetLeft-lastX;
+					speedY=oDiv.offsetTop-lastY;
+					lastX=oDiv.offsetLeft;
+					lastY=oDiv.offsetTop;
+					
+					
+				};
+				
+				document.onmouseup=function(){
+					document.onmousemove=document.onmoseup=null;
+					move(oDiv,speedX,speedY);	
+				};
+				return false;
+			};
+		}
+		
+		function move(obj,speedX,speedY){
+			obj.timer=setInterval(function(){
+				speedY++;
+				var l=obj.offsetLeft+speedX;
+				var t=obj.offsetTop+speedY;
+				
+				if(t>document.documentElement.clientHeight-obj.offsetHeight){
+					t=document.documentElement.clientHeight-obj.offsetHeight;
+					speedY*=-1;
+					speedY*=0.7;
+					speedX*=0.7;
+				}	
+				if(t<0){
+					t=0;
+					speedY*=-1;
+					speedY*=0.7;
+					speedX*=0.7;
+				}
+				if(l>document.documentElement.clientWidth-obj.offsetWidth){
+					l=document.documentElement.clientWidth-obj.offsetWidth;
+					speedX*=-1;
+					speedY*=0.7;
+					speedX*=0.7;
+				}
+				if(l<0){
+					l=0;
+					speedX*=-1;
+					speedY*=0.7;
+					speedX*=0.7;
+				}
+				
+				obj.style.left=l+'px';
+				obj.style.top=t+'px';
+				
+				if(collTest(obj,oBlock)){
+					oTips.style.display='block';
+				}
+
+				
+				
+				
+				if(Math.abs(speedX)<1) speedX=0;
+				if(Math.abs(speedY)<1 ) speedY=0;
+				
+				if(speedX==0 && speedY==0 &&obj.offsetTop==document.documentElement.clientHeight-obj.offsetHeight){
+					clearInterval(obj.timer);
+					obj.style.display='none';
+				}
+			},30);
+			
+			function collTest(obj1,obj2){
+				var l1=obj1.offsetLeft;
+				var r1=obj1.offsetLeft+obj1.offsetWidth;
+				var t1=obj1.offsetTop;
+				var b1=obj1.offsetTop+obj1.offsetHeight;
+				
+				var l2=obj2.offsetLeft;
+				var r2=obj2.offsetLeft+obj2.offsetWidth;
+				var t2=obj2.offsetTop;
+				var b2=obj2.offsetTop+obj2.offsetHeight;
+				if(r1<l2 || b1<t2 || l1>r2 ||t1>b2){
+					return false;
+				} else{
+					return true;	
+				}
+			}
+			
+		};
+		
+		
+
+		}
+    </script>
+
+</body>
+</html>

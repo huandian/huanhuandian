@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>cat</title>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+			list-style:none;	
+		}
+		body{
+			background-color:#000;	
+		}
+    	ul{
+			width:636px;
+			height:636px;
+			margin:20px auto;
+			border:1px solid black;
+			
+		}
+		li{
+			width:200px;
+			height:200px;
+			float:left;	
+			margin:5px;
+			border:1px solid black;
+			background-size:cover;
+			transition:0.5s;
+			z-index:88px;
+			position:relative;
+		}
+		li:hover{
+			transform:scale(2);
+			z-index:100;
+		}
+    </style>
+</head>
+
+<body>
+	<ul>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    </ul>
+    
+    <script>
+    	var aLi=document.querySelectorAll('li');
+		aLi.forEach(function(oLi,index){
+			oLi.style.backgroundImage=`url(cat/${index+1}.jpg)`;
+		});
+    </script>
+</body>
+</html>

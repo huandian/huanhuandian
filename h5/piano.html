@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>piano</title>
+	<style>
+		body{
+			background-color:#000;	
+		}
+		#good{
+			font-size: 30px;
+		}
+
+		li,ul{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+
+		ul{
+			width:528px;
+			height: 344px;
+			margin: 200px auto;
+		}
+
+		li{
+			width: 60px;
+			height: 340px;
+			float: left;
+			text-align: center;
+			line-height: 560px;
+			border: 1px solid silver;
+			color: silver;
+			margin:2px;
+		}
+
+		li.active{
+			transform:perspective(800px) rotateX(-10deg);
+			transform-origin: top center;
+		}
+	</style>
+</head>
+<body>
+	<span id="good"></span>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+	</ul>
+	<script src="../statics/sound.js"></script>
+	<script>
+		var oGood = document.querySelector('span');
+		var aLi = document.querySelectorAll('li');
+
+		aLi.forEach(function(oLi,index){
+			oLi.onmousedown = function(){
+				setActive({
+					keyCode:index+49
+				});
+			}
+
+			oLi.onmouseup = function(){
+				setNegative({
+					keyCode:index+49
+				});
+			}
+		})
+
+		window.onkeydown = setActive;
+		window.onkeyup = setNegative;
+
+		function setActive({keyCode}){
+
+			if( keyCode < 49 || keyCode > 56 ) return;
+
+			playSound(keyCode);
+
+			aLi[keyCode - 49].classList.add('active');
+		}
+
+		function setNegative({keyCode}){
+			if( keyCode < 49 || keyCode > 56 ) return;
+
+			aLi[keyCode - 49].classList.remove('active');
+		}
+
+		function playSound(keyCode){
+
+			var oAudio = new Audio(oggSound[`sound${keyCode}`]);
+
+			oAudio.play();
+
+			oAudio.onended = function(){
+				oAudio = null;
+				console.log(Math.random());
+			}
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
